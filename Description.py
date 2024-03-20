@@ -19,7 +19,7 @@ def extract_description(path,time_b=0):
     else:
         # If CUDA is not available, just use CPU
         devices = [torch.device("cpu")]
-    inicio=time.time()
+
     model_llava = LlavaForConditionalGeneration.from_pretrained("llava-hf/llava-1.5-7b-hf")
     model_llava = nn.DataParallel(model_llava, device_ids=devices)
 
@@ -39,6 +39,7 @@ def extract_description(path,time_b=0):
     folders = os.listdir(path)
     path_principal=os.getcwd()
     os.mkdir(os.path.join(path_principal, 'Ouputs_LLaVA'))
+    inicio = time.time()
     for folder in folders:
         new_folder=os.path.join(path_principal,'Ouputs_LLaVA',folder)
         try:
