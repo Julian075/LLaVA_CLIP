@@ -38,7 +38,11 @@ def extract_description(path,time_b=0):
 
     folders = os.listdir(path)
     path_principal=os.getcwd()
-    os.mkdir(os.path.join(path_principal, 'Ouputs_LLaVA'))
+    try:
+        oos.mkdir(os.path.join(path_principal, 'Ouputs_LLaVA'))
+    except OSError as error:
+        print(f"No se pudo crear el directorio 'Ouputs_LLaVA': {error}")
+
     inicio = time.time()
     for folder in folders:
         new_folder=os.path.join(path_principal,'Ouputs_LLaVA',folder)
