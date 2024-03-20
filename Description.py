@@ -49,7 +49,7 @@ def extract_description(path,time_b=0):
         image_names=os.listdir(os.path.join(path,folder))
         for img_name in image_names:
             image = Image.open(os.path.join(path,folder,img_name))
-            inputs = processor(text=prompt, images=image, return_tensors="pt")
+            inputs = processor(text=prompt, images=image, return_tensors="pt").to(device)
             ## Generate
             generate_ids = model_llava.module.generate(**inputs, max_length=300, min_length=200, do_sample=False)
             description=processor.batch_decode(generate_ids, skip_special_tokens=True, clean_up_tokenization_spaces=False)[0]
