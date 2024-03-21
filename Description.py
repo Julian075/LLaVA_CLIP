@@ -38,22 +38,29 @@ def extract_description(path,time_b=0):
 
     folders = os.listdir(path)
     path_principal=os.getcwd()
-    try:
+
+    if os.path.exists(os.path.join(path_principal, 'Ouputs_LLaVA')):
+        print("El directorio Ouputs_LLaVA ya existe.")
+    else:
         os.mkdir(os.path.join(path_principal, 'Ouputs_LLaVA'))
-    except OSError as error:
-        print(f"No se pudo crear el directorio 'Ouputs_LLaVA': {error}")
 
     inicio = time.time()
     for folder in folders:
         new_folder=os.path.join(path_principal,'Ouputs_LLaVA',folder)
-        try:
-            os.mkdir(new_folder)
-        except OSError as error:
-            print(f"No se pudo crear el directorio '{new_folder}': {error}")
+        if os.path.exists(new_folder):
+            image_names_old = [nombre[:-5] for nombre in os.listdir(new_folder)]
+            image_names = [nombre[:-4] for nombre in os.listdir(os.path.join(path, folder))]
+            print(image_names)
+            image_names = list(set(image_names) - set(image_names_old))
+            #image_names = [nombre + '.jpg' for nombre in image_names_aux]
 
-        image_names=os.listdir(os.path.join(path,folder))
+        else:
+            os.mkdir(new_folder)
+            image_names = os.listdir(os.path.join(path, folder))
+
+
         for img_name in image_names:
-            image = Image.open(os.path.join(path,folder,img_name))
+            image = Image.open(os.path.join(path,folder,img_name+'.jpg'))
             inputs = processor(text=prompt, images=image, return_tensors="pt").to(device)
             ## Generate
             generate_ids = model_llava.module.generate(**inputs, max_length=300, min_length=200, do_sample=False)
@@ -68,8 +75,9 @@ def extract_description(path,time_b=0):
                 "description": description
             }
 
+
             # Guardar el diccionario en un archivo JSON
-            json_name=os.path.join(new_folder,img_name[:-4]+'.json')
+            json_name=os.path.join(new_folder,img_name+'.json')
             with open(json_name, "w") as json_file:
                 json.dump(data, json_file, indent=4)
 
