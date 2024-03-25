@@ -49,10 +49,9 @@ def extract_description(path,time_b=0):
         new_folder=os.path.join(path_principal,'Ouputs_LLaVA',folder)
         if os.path.exists(new_folder):
             image_names_old = [nombre[:-5] for nombre in os.listdir(new_folder)]
-            image_names = [nombre[:-4] for nombre in os.listdir(os.path.join(path, folder))]
-            print(image_names)
-            image_names = list(set(image_names) - set(image_names_old))
-            #image_names = [nombre + '.jpg' for nombre in image_names_aux]
+            image_names_aux = [nombre[:-4] for nombre in os.listdir(os.path.join(path, folder))]
+            image_names_aux = list(set(image_names_aux) - set(image_names_old))
+            image_names = [nombre + '.jpg' for nombre in image_names_aux]
 
         else:
             os.mkdir(new_folder)
@@ -60,7 +59,7 @@ def extract_description(path,time_b=0):
 
 
         for img_name in image_names:
-            image = Image.open(os.path.join(path,folder,img_name+'.jpg'))
+            image = Image.open(os.path.join(path,folder,img_name))
             inputs = processor(text=prompt, images=image, return_tensors="pt").to(device)
             ## Generate
             generate_ids = model_llava.module.generate(**inputs, max_length=300, min_length=200, do_sample=False)
