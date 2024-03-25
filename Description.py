@@ -59,26 +59,24 @@ def extract_description(path,time_b=0):
 
 
         for img_name in image_names:
-            image = Image.open(os.path.join(path,folder,img_name))
-            inputs = processor(text=prompt, images=image, return_tensors="pt").to(device)
-            ## Generate
-            generate_ids = model_llava.module.generate(**inputs, max_length=300, min_length=200, do_sample=False)
-            description=processor.batch_decode(generate_ids, skip_special_tokens=True, clean_up_tokenization_spaces=False)[0]
-            _, description = description.split("ASSISTANT:")
-            fin=time.time()
-            time_1=fin-inicio
-            if time_b:
-                print('time for prediction: ',time_1)
-            #save information
-            data = {
-                "description": description
-            }
-
-
-            # Guardar el diccionario en un archivo JSON
-            json_name=os.path.join(new_folder,img_name+'.json')
-            with open(json_name, "w") as json_file:
-                json.dump(data, json_file, indent=4)
+           image = Image.open(os.path.join(path,folder,img_name))
+           inputs = processor(text=prompt, images=image, return_tensors="pt").to(device)
+           ## Generate
+           generate_ids = model_llava.module.generate(**inputs, max_length=300, min_length=200, do_sample=False)
+           description=processor.batch_decode(generate_ids, skip_special_tokens=True, clean_up_tokenization_spaces=False)[0]
+           _, description = description.split("ASSISTANT:")
+           fin=time.time()
+           time_1=fin-inicio
+           if time_b:
+               print('time for prediction: ',time_1)
+           #save information
+           data = {
+               "description": description
+           }
+           # Guardar el diccionario en un archivo JSON
+           json_name=os.path.join(new_folder,img_name[:-4]+'.json')
+           with open(json_name, "w") as json_file:
+               json.dump(data, json_file, indent=4)
 
 
 if __name__ == "__main__":
