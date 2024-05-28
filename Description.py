@@ -42,7 +42,7 @@ def extract_description(path,time_b=0):
     if os.path.exists(os.path.join(path_principal, 'Ouputs_LLaVA')):
         print("El directorio Ouputs_LLaVA ya existe.")
     else:
-        os.mkdir(os.path.join(path_principal, 'Ouputs_LLaVA'))
+        os.mkdir(os.path.join(path_principal, 'Ouputs_LLaVA'+path[:-4]))
 
     inicio = time.time()
     for folder in folders:
