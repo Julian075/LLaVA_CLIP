@@ -38,7 +38,7 @@ def extract_description(path,time_b=0):
 
     folders = os.listdir(path)
     path_principal=os.getcwd()
-    path2=path.split('/')[-1][:-4]
+    path2=path.split('/')[-1]
     if os.path.exists(os.path.join(path_principal, 'Ouputs_LLaVA/'+path2)):
         print("El directorio Ouputs_LLaVA ya existe.")
     else:
