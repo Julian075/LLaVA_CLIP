@@ -38,15 +38,15 @@ def extract_description(path,time_b=0):
 
     folders = os.listdir(path)
     path_principal=os.getcwd()
-
-    if os.path.exists(os.path.join(path_principal, 'Ouputs_LLaVA')):
+    path2=path.split('/')[-1][:-4]
+    if os.path.exists(os.path.join(path_principal, 'Ouputs_LLaVA/'+path2)):
         print("El directorio Ouputs_LLaVA ya existe.")
     else:
-        os.mkdir(os.path.join(path_principal, 'Ouputs_LLaVA'+path[:-4]))
+        os.mkdir(os.path.join(path_principal, 'Ouputs_LLaVA/'+path2))
 
     inicio = time.time()
     for folder in folders:
-        new_folder=os.path.join(path_principal,'Ouputs_LLaVA',folder)
+        new_folder=os.path.join(path_principal,'Ouputs_LLaVA/'+path2,folder)
         if os.path.exists(new_folder):
             image_names_old = [nombre[:-5] for nombre in os.listdir(new_folder)]
             image_names_aux = [nombre[:-4] for nombre in os.listdir(os.path.join(path, folder))]
