@@ -1,8 +1,0 @@
-
-num_gpus:  1 [device(type='cuda', index=0)]
-0
-Epoch [1/149]
-Train loss: nan, acc: 0.1723
-Val loss: nan,Val acc: 0.1704
-Time for epoch [251.03886675834656]
-Save model
