@@ -10,7 +10,7 @@ import datetime
 import model_V2 as md
 import wandb
 
-from PIL import Image
+
 
 
 

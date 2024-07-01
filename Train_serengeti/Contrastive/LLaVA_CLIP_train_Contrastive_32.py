@@ -10,8 +10,7 @@ import datetime
 import model as md
 import wandb
 
-import clip
-from PIL import Image
+
 
 
 
