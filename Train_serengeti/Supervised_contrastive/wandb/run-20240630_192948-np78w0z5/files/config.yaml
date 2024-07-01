@@ -1,0 +1,64 @@
+wandb_version: 1
+
+_wandb:
+  desc: null
+  value:
+    python_version: 3.10.9
+    cli_version: 0.16.6
+    framework: torch
+    is_jupyter_run: false
+    is_kaggle_kernel: false
+    start_time: 1719793788.0
+    t:
+      1:
+      - 1
+      - 55
+      2:
+      - 1
+      - 55
+      3:
+      - 19
+      - 23
+      - 37
+      4: 3.10.9
+      5: 0.16.6
+      8:
+      - 3
+      - 5
+      13: windows-amd64
+batch_size:
+  desc: null
+  value: 143
+dropout:
+  desc: null
+  value: 0.22848331437718855
+hidden_dim:
+  desc: null
+  value: 1385
+lr:
+  desc: null
+  value: 0.0027866465015731756
+momentum:
+  desc: null
+  value: 0.9854499642528796
+num_epochs:
+  desc: null
+  value: 149
+num_layers:
+  desc: null
+  value: 4
+opt:
+  desc: null
+  value: sgd
+patience:
+  desc: null
+  value: 20
+t:
+  desc: null
+  value: 0.01
+weight_Clip:
+  desc: null
+  value: 0.40436231642690834
+name:
+  desc: null
+  value: run_num_layers_4_lr_0.0027866465015731756_weight_Clip_0.40436231642690834_dropout_0.22848331437718855
